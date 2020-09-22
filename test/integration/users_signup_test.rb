@@ -9,8 +9,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
                                          password:              "foo",
                                          password_confirmation: "bar" } }
     end
-
-    assert_template 'users/new'
+    follow_redirect!
+    assert_template 'users/show'
   end
 
 end

@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       #@user.send_activation_email
-      flash[:success] = "Welcome to the sample app!."
+      flash[:success] = "Welcome to the sample app!"
       redirect_to @user
     else
       render 'new'
