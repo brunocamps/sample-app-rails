@@ -31,4 +31,9 @@ class User < ApplicationRecord
     def self.new_token
         SecureRandom.urlsafe_base64
     end
+
+    # Returns true fi the given token matches the digest
+    def authenticated?(remember_token)
+        BCrypt::Password.new(remember_digest).is_password?(remember_token)
+    end
 end
