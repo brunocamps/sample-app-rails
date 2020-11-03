@@ -5,12 +5,12 @@ class MicropostsController < ApplicationController
     def create
         @micropost = 
     current_user.microposts.build(micropost_params)
-
+    @micropost.image.attach(params[:micropost][:image]) #check 
         if @micropost.save
             flash[:success] = "Micropost created!"
             redirect_to root_url
         else
-            @feed_items current_user.feed.paginate(page: params[:page])
+            @feed_items = current_user.feed.paginate(page: params[:page])
             render 'static_pages/home'
         end
     end
@@ -24,7 +24,7 @@ class MicropostsController < ApplicationController
     private
 
         def micropost_params
-            params.require(:micropost).permit(:content)
+            params.require(:micropost).permit(:content, :image)
         end
 
         def correct_user
